@@ -1,5 +1,7 @@
 const video = document.getElementById('video')
-const age = document.getElementById('age')
+
+
+let result = document.getElementById("result");
 
 Promise.all([
     faceapi.nets.tinyFaceDetector.loadFromUri('./models'),
@@ -9,11 +11,13 @@ Promise.all([
     faceapi.nets.ageGenderNet.loadFromUri('./models')
 ]).then(startVideo())
 
+
+
 function startVideo() {
     navigator.getUserMedia(
         {
             video: {
-                facingMode: "user"
+                facingMode: { exact: "user" }
             }
         },
         stream => video.srcObject = stream,
